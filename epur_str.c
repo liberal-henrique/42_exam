@@ -30,11 +30,13 @@
 int main(int argc, char *argv[])
 {
     int i;
+    int last_char;
     int flag;
     char    c;
 
     i = 0;
     flag = 0;
+    last_char = 0;
     if (argc != 2)
     {
         write(1, "Too much arguments", 18);
@@ -42,10 +44,18 @@ int main(int argc, char *argv[])
     }
     else
     {
-        while (argv[1][i])
+        //"this        time it      will     be    more complex  .      "
+        while (argv[1][last_char])
+            last_char++;
+        last_char--;
+        while (argv[1][last_char] == 32 || (argv[1][last_char] >= 9 && argv[1][last_char] <= 13))
+            last_char--;
+        while ((argv[1][i] == 32 || argv[1][i] >= 9 && argv[1][i] <= 13))
+            i++;
+        while (i <= last_char)
         {
-            while ((argv[1][i] == 32 || argv[1][i] >= 9 && argv[1][i] <= 13))
-            {    
+            while (argv[1][i] == 32 || (argv[1][i] >= 9 && argv[1][i] <= 13))
+            {
                 i++;
                 flag = 1;
             }
@@ -58,7 +68,7 @@ int main(int argc, char *argv[])
             if (argv[1][i])
             {
                 c = argv[1][i];
-                write(1, &c, 1);  
+                write(1, &c, 1);
                 i++;
             }
         }
