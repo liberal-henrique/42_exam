@@ -21,14 +21,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	length_range(int start, int end)
+int	length_range(int limit, int item_to_decrement)
 {
 	int	i;
 	int	count;
 
-	i = end;
+	i = item_to_decrement;
 	count = 0;
-	while (i-- >= start)
+	while (i-- >= limit)
 		count++;
 	return (count);
 }
@@ -39,29 +39,41 @@ int     *ft_rrange(int start, int end)
 	int	index;
 	int	length;
 
-	length = length_range(start, end);
+	if (end < start)
+		length = length_range(end, start);
+	if (start < end)
+		length = length_range(start, end);
 	index = 0;
 	new_str = malloc(sizeof(int) * (length + 1));
 	if (!new_str)
 		return (0);
 	new_str[length] = '\0';
-	while (end >= start)
+	if (end > start){
+		while (end >= start)
+			new_str[index++] = end--;
+	}
+	if (start > end)
 	{
-		new_str[index++] = end--;
+		while (end <= start)
+			new_str[index++] = end++;
 	}
 	return (new_str);
 }
 
+
 int	main(void)
 {
-	int start = 1;
-	int	end = 40;
+	int start = 10;
+	int	end = -10;
 	int length;
 	int *new_str;
 
+	printf("End: %i, start: %i\n", end, start);
 	new_str = ft_rrange(start, end);
 	length = 0;
-	while (new_str[length])
-		printf("Number: %i, ", new_str[length++]);
+	while (length < 21)
+		printf("Number: %i, |", new_str[length++]);
 	return (0);
 }
+
+
