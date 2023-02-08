@@ -156,24 +156,3 @@ int main (int argc, char **argv)
 	ft_putstr(new_str);
 	return (0);
 }
-
-
-//--> eu ja consigo saber qual a dimensao da string final
-//--> eu ainda nao consigo copiar o conteudo para a string final pois nao selecionei
-//o conteudo limitando o numero de espacos. Portanto agr preciso copiar da segunda palavra
-//em diante limitando os espacos em excesso.
-
-
-// 	printf("%i\n", i_first_word);
-// 	//know I can iterate through the whole string limiting the number of spaces
-// 	//or tabs to just one between words.
-// 	i_general = i_first_word;
-// 	length = 0;
-// 	while (argv[1][i_general])
-// 	{
-// 		new_str[length++] = argv[1][i_general];
-// 		i_general++;
-// 	}
-// 	new_str[i_general] = '\0';
-// 	printf("%s\n", new_str);
-// 	return (0);
