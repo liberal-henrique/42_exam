@@ -28,52 +28,50 @@
 // $
 // $>
 
-//"Luiz Henrique Liberal de Souza" --> "Souza de Liberal Henrique Luiz"
+// "Wingardium Leviosa" | cat -e
 
 #include <unistd.h>
 #include <stdio.h>
 
-int	main(int ac, char **av)
+int ft_isspace(char c)
 {
-	int	i;
-	int	j;
-	int	flag;
-
-	i = 0;
-	j = 0;
-	flag = 0;
-	if (ac == 2)
-	{
-		while (av[1][i])
-		{
-			i++;
-			if (av[1][i] == 32 || av[1][i] == 9 || av[1][i] == 11)
-				flag = 1;
-		}
-		if (flag == 1)
-			while (i >= 0)
-			{
-				if (av[1][i] == 32 || av[1][i] == 9 || av[1][i] == 11)
-				{
-					j = i;
-					j++;
-					while (av[1][j] != 32 && av[1][j] != 9 && av[1][j] != 11 && av[1][j] != '\0')
-					{
-						write(1, &av[1][j], 1);
-						j++;	
-					}
-					write(1, " ", 1);
-				}
-				i--;
-			}
-		j = 0;
-		while (av[1][j] != 32 && av[1][j] != 9 && av[1][j] != 11 && av[1][j] != '\0')
-		{
-			write(1, &av[1][j], 1);
-			j++;	
-		}
-	}
-	write(1, "\n", 1);
-	return (0);
+    return (c == 32 || (c >= 9 && c <= 13));
 }
+
+int main(int ac, char **av)
+{
+    if (ac == 2)
+    {
+		int	flag;
+        int i;
+        int j;
+
+        i = 0;
+        j = 0;
+		flag = 0;
+        while (av[1][i])
+            i++;
+		while (i >= 0)
+		{
+			i--;
+			while (!ft_isspace(av[1][i]) && i)
+				i--;
+			if (ft_isspace(av[1][i]))
+				j = i + 1;
+			else
+				j = i;
+			while (!ft_isspace(av[1][j]) && av[1][j])
+			{
+				write(1, &av[1][j], 1);
+				j++;
+			}
+			if (i != 0)
+				write (1, " ", 1);
+			i--;
+		}
+    }
+    write (1, "\n", 1);
+    return (0);
+}
+
 
