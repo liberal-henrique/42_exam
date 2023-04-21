@@ -28,37 +28,29 @@
 
 //"    luiz    henrique" --> "luiz"
 //A -> 65 && Z --> 90 || a -> 97 && z -> 122
-
 #include <unistd.h>
 
-int	main(int argc, char *argv[])
+int	space(char c)
+{
+	return (c == 32 || (c >= 9 && c <= 13));
+}
+
+int	main(int ac, char **av)
 {
 	int		i;
 	char	c;
-	
+
 	i = 0;
-	if (argc != 2)
+	if (ac == 2)
 	{
-		write(1, "\n", 1);
-		return (0);
-	}
-	else
-	{
-		while (*argv)
+		while (space(av[1][i]))
+			i++;
+		while (space(av[1][i]) == 0 && av[1][i])
 		{
-			if (argv[1][i] == 32 || argv[1][i] == 9)
-				i++;
-			if ((argv[1][i] >= 65 && argv[1][i] <= 90) || (argv[1][i] >= 97 && argv[1][i] <= 122))
-			{
-				while (argv[1][i] && argv[1][i] != 32 && argv[1][i] != 9)
-				{
-					c = argv[1][i];
-					write(1, &c, 1);
-					i++;
-				}
-				return (1);
-			}
+			write(1, &av[1][i], 1);
 			i++;
 		}
 	}
+	write(1, "\n", 1);
+	return (0);
 }
